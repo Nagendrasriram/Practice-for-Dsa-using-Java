@@ -1,3 +1,4 @@
+//Trying to find max and min 
 import java.util.Scanner;
 public class maxmin {
     public static void main(String[] args) {
