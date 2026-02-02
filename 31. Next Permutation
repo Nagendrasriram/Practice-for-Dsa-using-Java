@@ -1,0 +1,49 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int index=-1;
+        //1. see the ith elemnet where we have to do 
+        for(int i=nums.length-2;i>=0;i--)
+        {
+            if(nums[i]<nums[i+1])
+            {
+                index=i;
+                break;
+            }
+        }
+        // check if slant is like 5 4 3 2 1
+        if (index == -1) {
+            reverse(nums, 0, nums.length - 1);
+            return;
+        }
+        // Swap the index with least number as alreday in desc we can do and sort them 
+        for(int i=nums.length-1;i>0;i--)
+        {
+            if(nums[i]>nums[index])
+            {
+                int temp = nums[i];
+                nums[i] = nums[index];
+                nums[index] = temp;
+                break;
+            }
+
+        }
+        reverse(nums,index+1,nums.length-1);
+        
+    }
+    public void reverse(int[] nums,int start,int end)
+    {
+        while(start<end)
+        {
+            swap(nums,start,end);
+            start++;
+            end--;
+        }
+
+    }
+    public void swap(int[] nums,int start,int end)
+    {
+        int temp = nums[start];
+        nums[start] = nums[end];
+        nums[end] = temp;
+    }
+}
