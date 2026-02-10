@@ -1,0 +1,45 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int low=0,max=0;
+        for (int wt : weights) {
+            low = Math.max(low, wt);
+        }
+
+        for(int wt: weights)
+        {
+            max+=wt;
+        }
+        int high =max;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(Cal(weights,days,mid))
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+    public boolean Cal(int[] wt,int days,int mid)
+    {
+        int load=0,day=1;
+        for(int i=0;i<wt.length;i++)
+        {
+            
+            if(load + wt[i] > mid)
+            {
+                load = wt[i];
+                day++;
+            }
+            else
+            {
+                load +=wt[i];
+            }
+        }
+        return day <= days;
+    }
+}
