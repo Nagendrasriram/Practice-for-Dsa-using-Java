@@ -1,0 +1,46 @@
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int high=0;
+        int low = Arrays.stream(nums).max().getAsInt();
+        for(int i=0;i<nums.length;i++)
+        {
+            high+=nums[i];
+        }
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(split(nums,k,mid))
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+                
+            }
+
+        }
+        return low;
+
+        
+    }
+    public boolean split(int[] nums,int k,int mid)
+    {
+        int part=1,sp=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(sp+nums[i]<=mid)
+            {
+                sp+=nums[i];
+            }
+            else
+            {
+                part++;
+                sp=nums[i];
+            }
+            
+        }
+        return part <=k;
+
+    }
+}
